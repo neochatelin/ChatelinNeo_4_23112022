@@ -60,8 +60,8 @@
               name="reserve"
               action="index.html"
               method="get"
-              onchange="saving()"
-              onsubmit="validate(event);"
+              onchange="saveFormData();"
+              onsubmit="validate(e);"
             >
               <div
                 class="formData">
@@ -72,8 +72,10 @@
                   id="first"
                   name="first"
                   minlength="2"
+                  onchange="checking('first')"
                   required
                 /><br>
+                <div class="error-msg error-msg-first">Vous devez entrer 2 caractères ou plus pour le champ du prénom.<br></div>
               </div>
               <div
                 class="formData">
@@ -84,8 +86,10 @@
                   id="last"
                   name="last"
                   minlength="2"
+                  onchange="checking('last')"
                   required
                 /><br>
+                <div class="error-msg error-msg-last">Vous devez entrer 2 caractères ou plus pour le champ du nom.<br></div>
               </div>
               <div
                 class="formData">
@@ -95,8 +99,10 @@
                   type="email"
                   id="email"
                   name="email"
+                  onchange="checking('email')"
                   required
                 /><br>
+                <div class="error-msg error-msg-email">Vous devez entrer une adresse mail valide.<br></div>
               </div>
               <div
                 class="formData">
@@ -106,13 +112,16 @@
                   type="date"
                   id="birthdate"
                   name="birthdate"
+                  onchange="checking('birthdate')"
                   required
                 /><br>
+                <div class="error-msg error-msg-birthdate">Vous devez entrer votre date de naissance.<br></div>
               </div>
               <div
                 class="formData">
                 <label for="quantity">À combien de tournois GameOn avez-vous déjà participé ?</label><br>
-                <input type="number" class="text-control" id="quantity" name="quantity" min="0" max="99" required>
+                <input type="number" class="text-control" id="quantity" name="quantity" max="99" value="0" onchange="checking('quantity')" required>
+                <div class="error-msg error-msg-quantity">Vous devez entrer un chiffre valide.</div>
               </div>
               <p class="text-label">A quel tournoi souhaitez-vous participer cette année ?</p>
               <div
@@ -193,6 +202,7 @@
                   type="checkbox"
                   id="checkbox1"
                   checked
+                  onchange="checking('checkbox')"
                   required
                 />
                 <label class="checkbox2-label" for="checkbox1" required>
