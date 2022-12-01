@@ -11,6 +11,8 @@ function editNav() {
 const modalbg = document.querySelector(".bground");
 const modalBtn = document.querySelectorAll(".modal-btn");
 const formData = document.querySelectorAll(".formData");
+let modalBodyForm = document.querySelector('.modal-body');
+let modalBodyRegistered = document.querySelector('.modal-body-registered');
 
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
@@ -36,7 +38,6 @@ function launchModal() {
     formData[6].children['checkbox2'].checked = modalForm.checkbox2;
   }
   modalbg.style.display = "block";
-  checking();
 }
 
 // close modal form
@@ -88,13 +89,16 @@ let checking = (e)=>{
         document.querySelector('.error-msg-email').style.display = "block"
       break;
     case "birthdate":
-      data.value != "" ?
-        document.querySelector('.error-msg-first').style.display = "none"
+      data.birthdate != "" ?
+        document.querySelector('.error-msg-birthdate').style.display = "none"
         :
-        document.querySelector('.error-msg-first').style.display = "block"
+        document.querySelector('.error-msg-birthdate').style.display = "block"
       break;
     case "quantity":
-      data.quantity < 0 && typeof parseInt(data.quantity) !== "number" ?isCorrect=false:'';
+      parseInt(data.quantity) > 0 && parseInt(data.quantity) !== NaN ?
+        document.querySelector('.error-msg-quantity').style.display = "none"
+        :
+        document.querySelector('.error-msg-quantity').style.display = "block"
       break;
     case "checkbox":
       data.checkbox1?'':isCorrect=false;
@@ -107,6 +111,58 @@ let checking = (e)=>{
 }
 
 // validate modal form
-let validate=()=>{
+
+document.querySelector('form').addEventListener('submit', (e)=>{
+  e.preventDefault();
+  saveFormData();
+  let isCorrect = true;
+  (data.first).length >= 2 ?
+    document.querySelector('.error-msg-first').style.display = "none"
+    :
+    (document.querySelector('.error-msg-first').style.display = "block",isCorrect = false)
   
-}
+  data.last.length >= 2 ?
+    document.querySelector('.error-msg-last').style.display = "none"
+    :
+    (document.querySelector('.error-msg-last').style.display = "block",isCorrect = false)
+  
+  (data.email).match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g)?
+    document.querySelector('.error-msg-email').style.display = "none"
+    :
+    (document.querySelector('.error-msg-email').style.display = "block",isCorrect = false)
+  
+  data.birthdate != "" ?
+    document.querySelector('.error-msg-birthdate').style.display = "none"
+    :
+    (document.querySelector('.error-msg-birthdate').style.display = "block",isCorrect = false)
+        
+  parseInt(data.quantity) > 0 && parseInt(data.quantity) !== NaN ?
+    document.querySelector('.error-msg-quantity').style.display = "none"
+    :
+    (document.querySelector('.error-msg-quantity').style.display = "block",isCorrect = false)
+  
+  data.checkbox1 ?
+    document.getElementsByClassName('btn-submit')[0].style.background = '#fe142f'
+    :
+    (document.getElementsByClassName('btn-submit')[0].style.background = 'grey',isCorrect = false)
+  
+  isCorrect ? (
+    modalBodyForm.animate([
+    {transform: "scale(1)"},
+    {transform: "scale(0)"},
+    {display: "none"}
+  ], {duration: 300}),
+  setTimeout(()=>{modalBodyForm.style.display = 'none';modalBodyRegistered.style.display = 'block'}, 300/2),
+  modalBodyRegistered.animate([
+    {transform: "scale(0)"},
+    {transform: "scale(1)"}
+  ], {duration: 200}))
+  :
+  document.getElementsByClassName('btn-submit')[0].animate([
+    {boxShadow: "rgba(200, 0, 0, 0.9) 0 0 22px 6px"},
+    {transform: "translateX(0px)"},
+    {transform: "translateX(5px)"},
+    {transform: "translateX(-5px)"},
+    {transform: "translateX(0px)"}
+  ], {duration: 300});
+})

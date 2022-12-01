@@ -61,7 +61,6 @@
               action="index.html"
               method="get"
               onchange="saveFormData();"
-              onsubmit="validate(e);"
             >
               <div
                 class="formData">
@@ -224,6 +223,20 @@
                 value="C'est parti"
               />
             </form>
+          </div>
+          <div class="modal-body-registered">
+            <p>
+              Merci pour
+              <br>
+              votre inscription
+            </p>
+            <input
+              class="btn-submit"
+              type="button"
+              class="button"
+              value="Fermer"
+              onclick="closeModal()"
+            />
           </div>
         </div>
       </div>
