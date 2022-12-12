@@ -14,7 +14,7 @@
   <body>
     <div class="topnav" id="myTopnav">
       <div class="header-logo">
-      <img alt="logo" src="./style/img/Logo.png" width="auto" height="auto" />
+      <img alt="logo" src="./img/Logo.png" width="auto" height="auto" />
     </div>
     <div class="main-navbar">
       
@@ -45,7 +45,7 @@
           </button>
         </div>
         <div class="hero-img">
-          <img src="./style/img/bg_img.jpg" alt="img" />
+          <img src="./img/bg_img.jpg" alt="img" />
         </div>
         <button class="btn-signup modal-btn">
           je m'inscris
@@ -114,7 +114,7 @@
                   onchange="checking('birthdate')"
                   required
                 /><br>
-                <div class="error-msg error-msg-birthdate">Vous devez entrer votre date de naissance.<br></div>
+                <div class="error-msg error-msg-birthdate">Vous devez entrer une date de naissance valide.<br></div>
               </div>
               <div
                 class="formData">
@@ -207,6 +207,7 @@
                 <label class="checkbox2-label" for="checkbox1" required>
                   <span class="checkbox-icon"></span>
                   J'ai lu et accepté les conditions d'utilisation.
+                  <div class="error-msg error-msg-checkbox">Vous devez valider les conditions d'utilisation.</div>
                 </label>
                 <br>
                 <input class="checkbox-input" type="checkbox" id="checkbox2" />

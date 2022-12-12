@@ -21,6 +21,7 @@ modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 let data;
 
 function launchModal() {
+  modalBodyForm.style.display = 'block';modalBodyRegistered.style.display = 'none'
   if(window.localStorage.getItem("modalForm")){
     let modalForm = JSON.parse(window.localStorage.getItem("modalForm"));
     formData[0].children[2].value = modalForm.first;
@@ -36,6 +37,12 @@ function launchModal() {
 
     formData[6].children['checkbox1'].checked = modalForm.checkbox1;
     formData[6].children['checkbox2'].checked = modalForm.checkbox2;
+  }else{
+    formData[0].children[2].value = '';
+    formData[1].children[2].value = '';
+    formData[2].children[2].value = '';
+    formData[3].children[2].value = '';
+    formData[4].children[2].value = '';
   }
   modalbg.style.display = "block";
 }
@@ -64,20 +71,20 @@ let saveFormData=()=>{
   window.localStorage.setItem("modalForm", JSON.stringify(data));
 }
 
-// checking
+// checking the modal input
 let checking = (e)=>{
   saveFormData();
   let btn = document.getElementsByClassName('btn-submit')[0];
   let isCorrect = true;
   switch (e) {
     case "first":
-      (data.first).length >= 2 ?
+      ((data.first).length >= 2 && (data.first).match(/^[a-z]+$/i)) ?
         document.querySelector('.error-msg-first').style.display = "none"
         :
         document.querySelector('.error-msg-first').style.display = "block"
       break;
     case "last":
-      data.last.length >= 2 ?
+      ((data.last).length >= 2 && (data.last).match(/^[a-z]+$/i)) ?
         document.querySelector('.error-msg-last').style.display = "none"
         :
         document.querySelector('.error-msg-last').style.display = "block"
@@ -89,19 +96,23 @@ let checking = (e)=>{
         document.querySelector('.error-msg-email').style.display = "block"
       break;
     case "birthdate":
-      data.birthdate != "" ?
-        document.querySelector('.error-msg-birthdate').style.display = "none"
+      let birthdate = new Date(data.birthdate);
+      (data.birthdate != "" && (Date.now() - birthdate.getTime()) > (31556952000 * 18)) ?
+        (document.querySelector('.error-msg-birthdate').style.display = "none")
         :
         document.querySelector('.error-msg-birthdate').style.display = "block"
       break;
     case "quantity":
-      parseInt(data.quantity) > 0 && parseInt(data.quantity) !== NaN ?
+      parseInt(data.quantity) > -1 && parseInt(data.quantity) !== NaN ?
         document.querySelector('.error-msg-quantity').style.display = "none"
         :
         document.querySelector('.error-msg-quantity').style.display = "block"
       break;
     case "checkbox":
-      data.checkbox1?'':isCorrect=false;
+      data.checkbox1?
+        document.querySelector('.error-msg-checkbox').style.display = "none"
+        :
+        document.querySelector('.error-msg-checkbox').style.display = "block"
       break;
 
     default:
@@ -156,7 +167,8 @@ document.querySelector('form').addEventListener('submit', (e)=>{
   modalBodyRegistered.animate([
     {transform: "scale(0)"},
     {transform: "scale(1)"}
-  ], {duration: 200}))
+  ], {duration: 200}),
+  localStorage.clear())
   :
   document.getElementsByClassName('btn-submit')[0].animate([
     {boxShadow: "rgba(200, 0, 0, 0.9) 0 0 22px 6px"},

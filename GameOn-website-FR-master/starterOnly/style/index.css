@@ -5,8 +5,11 @@
     color: #fe142f;
     font-weight: normal;
     font-size: medium;
-}
-.modal-body-registered{
+}.error-msg-checkbox{
+    position: absolute;
+    white-space: nowrap;
+    font-size: small;
+}.modal-body-registered{
     display: none;
     padding: 15px 8%;
     margin: 15px auto;
@@ -19,4 +22,17 @@
     justify-content: center;
     height: max-content;
     height: 620px;
+}.content{
+    box-shadow: rgba(0, 0, 0, 0.641) 0px 17px 15px -5px;
+}.fa{
+    transform: scale(1.9, 1.7);
+}
+
+@media screen and (max-width: 768px) {
+    .content{
+        max-width: 100vw;
+        margin: calc(100vh - 686px) 0 0 0;
+        border-radius: 10px 10px 0 0;
+        padding: 0;
+    }
 }
