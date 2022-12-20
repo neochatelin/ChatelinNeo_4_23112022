@@ -78,13 +78,13 @@ let checking = (e)=>{
   let isCorrect = true;
   switch (e) {
     case "first":
-      ((data.first).length >= 2 && (data.first).match(/^[a-z]+$/i)) ?
+      ((data.first).length >= 2 && (data.first).match(/^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u)) ?
         document.querySelector('.error-msg-first').style.display = "none"
         :
         document.querySelector('.error-msg-first').style.display = "block"
       break;
     case "last":
-      ((data.last).length >= 2 && (data.last).match(/^[a-z]+$/i)) ?
+      ((data.last).length >= 2 && (data.last).match(/^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u)) ?
         document.querySelector('.error-msg-last').style.display = "none"
         :
         document.querySelector('.error-msg-last').style.display = "block"
