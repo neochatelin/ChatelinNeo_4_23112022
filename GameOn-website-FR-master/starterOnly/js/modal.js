@@ -74,8 +74,6 @@ let saveFormData=()=>{
 // checking the modal input
 let checking = (e)=>{
   saveFormData();
-  let btn = document.getElementsByClassName('btn-submit')[0];
-  let isCorrect = true;
   switch (e) {
     case "first":
       ((data.first).length >= 2 && (data.first).match(/^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u)) ?
@@ -118,7 +116,6 @@ let checking = (e)=>{
     default:
       break;
   }
-  isCorrect? btn.style.background = '#fe142f' : btn.style.background = 'grey';
 }
 
 // validate modal form
